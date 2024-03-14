@@ -1,18 +1,16 @@
 pipeline {
     agent any
 
-    tools {
-        // Install the Maven version configured as "M3" and add it to the path.
-        maven "MAVEN"
-    }
-
     stages {
+    stage('Checkout') {
+                steps {
+                    // Checkout the source code from the repository
+                    checkout scm
+                }
+            }
+
         stage('Build') {
             steps {
-                // Get some code from a GitHub repository
-                git 'https://github.com/vinayakg2001/Framework2.git'
-
-                // Run Maven on a Unix agent.
                 bat 'mvn clean'
                 bat 'mvn clean test'
             }
